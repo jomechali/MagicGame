@@ -11,16 +11,26 @@ public class TurnManager : MonoBehaviour {
 	{
 		Debug.Log ("object to add" + (objectToAdd != null) + ((Unit)objectToAdd).positionInGrid);
 
-		IEnumerator<TurnPlayingObject> enumerator = allPlayingObjects.GetEnumerator ();
+		////temp : faire une initialisation propre quand tout sera en place
+		if (allPlayingObjects == null) 
+		{
+			allPlayingObjects = new List<TurnPlayingObject> ();
+			allPlayingObjects.Add (objectToAdd);
+		} 
+		else
+		{
+			IEnumerator<TurnPlayingObject> enumerator = allPlayingObjects.GetEnumerator ();
 
-		int position = 0;
-		Debug.Log (position);
-		while (enumerator.MoveNext () && enumerator.Current.GetInitiative () > objectToAdd.GetInitiative ())
-			position++;
+			int position = 0;
+			Debug.Log (position);
+			while (enumerator.MoveNext () && enumerator.Current.GetInitiative () > objectToAdd.GetInitiative ())
+				position++;
 
-		allPlayingObjects.Insert (position, objectToAdd);
+			allPlayingObjects.Insert (position, objectToAdd);
+		}
 	}
 
+	// when all units have either do nothing or can't do something
 	public void LaunchTurn()
 	{
 		foreach (var playingObject in allPlayingObjects) 
@@ -38,6 +48,7 @@ public class TurnManager : MonoBehaviour {
 		int previouslyPlayingObjectIndex = allPlayingObjects.FindIndex (x => currentPlayingObject == x);
 		if (previouslyPlayingObjectIndex == allPlayingObjects.Count - 1) 
 		{
+			//miss the test before increment the time budget
 			//begin the next turn
 			LaunchTurn ();
 		}

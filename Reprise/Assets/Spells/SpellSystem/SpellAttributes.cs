@@ -40,9 +40,6 @@ public class SpellAttributes {
 	List<Vector3Int> relativeShape;
 	ShootType shootType;
 
-	// spell specific information
 	SpellType spellType;
-
-	//toutes infos, voir properties
 
 }

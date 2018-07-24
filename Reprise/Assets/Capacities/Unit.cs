@@ -28,8 +28,8 @@ public class Unit : MonoBehaviour, TurnPlayingObject {
 		gameManager = FindObjectOfType<Constants> ();
 		gameManager.allUnits.Add (this);
 		turnManager = FindObjectOfType<TurnManager> ();
-		Debug.Log ("add this");
 		turnManager.AddObject (this);
+		Debug.Log (positionInGrid);
 		transform.position = gameManager.walkableTileMap.GetCellCenterWorld (positionInGrid);
 
 		//for tests since there is nothing but one unit
