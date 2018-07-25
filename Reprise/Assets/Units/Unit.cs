@@ -21,16 +21,21 @@ public class Unit : MonoBehaviour, TurnPlayingObject {
 
 	protected Controler controler;
 
-	public float tmpDammages = 10F;
-	public float tmpDef = 5F;
+	[HideInInspector] public UnitAttributes currentAttributes; // turn it into unitbreed
+
+	private UnitAttributes baseAttributes;
 
 	void Start()
 	{
+		
 		gameManager = FindObjectOfType<Constants> ();
 		gameManager.allUnits.Add (this);
 		turnManager = FindObjectOfType<TurnManager> ();
 		turnManager.AddObject (this);
 		transform.position = gameManager.walkableTileMap.GetCellCenterWorld (positionInGrid);
+		baseAttributes = gameObject.GetComponent<UnitAttributes> ();
+		currentAttributes = new UnitAttributes (baseAttributes);
+
 	}
 
 	void Update() {

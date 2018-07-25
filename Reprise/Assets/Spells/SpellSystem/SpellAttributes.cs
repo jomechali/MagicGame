@@ -25,21 +25,21 @@ public enum SpellType
 
 public class SpellAttributes {
 
-	float manaCost;
-	float power;
+	public float manaCost = 0;
+	public float power = 0;
 
-	float channelTime;
+	public float channelTime = 0;
 
-	float spellInitiave;
-	float spellIncrement;
-	float spellTurnCost;
+	public float spellInitiave = 0;
+	public float spellIncrement = 0;
+	public float spellTurnCost = 0;
 
 	// target
-	TargetType targettype;
-	float range;
-	List<Vector3Int> relativeShape;
-	ShootType shootType;
+	public TargetType targettype = TargetType.Position;
+	public float range = 0;
+	public List<Vector3Int> relativeShape = new List<Vector3Int> () {new Vector3Int(0,0,0)};
+	public ShootType shootType = ShootType.Missile;
 
-	SpellType spellType;
+	public SpellType spellType = SpellType.DirectDammages;
 
 }
