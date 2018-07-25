@@ -4,42 +4,42 @@ using UnityEngine;
 
 public class TurnManager : MonoBehaviour {
 
-	private List<TurnPlayingObject> allPlayingObjects;
+	private List<TurnPlayingObject> allPlayingObjects = new List<TurnPlayingObject> ();
 	private TurnPlayingObject currentPlayingObject;
 
 	public void AddObject(TurnPlayingObject objectToAdd)
 	{
 		Debug.Log ("object to add" + (objectToAdd != null) + ((Unit)objectToAdd).positionInGrid);
 
-		////temp : faire une initialisation propre quand tout sera en place
-		if (allPlayingObjects == null) 
-		{
-			allPlayingObjects = new List<TurnPlayingObject> ();
-			allPlayingObjects.Add (objectToAdd);
-		} 
-		else
-		{
-			IEnumerator<TurnPlayingObject> enumerator = allPlayingObjects.GetEnumerator ();
+		IEnumerator<TurnPlayingObject> enumerator = allPlayingObjects.GetEnumerator ();
 
-			int position = 0;
-			Debug.Log (position);
-			while (enumerator.MoveNext () && enumerator.Current.GetInitiative () > objectToAdd.GetInitiative ())
-				position++;
+		int position = 0;
+		while (enumerator.MoveNext () && enumerator.Current.GetInitiative () > objectToAdd.GetInitiative ())
+			position++;
 
-			allPlayingObjects.Insert (position, objectToAdd);
-		}
+		Debug.Log ("unit added at position " + position);
+		allPlayingObjects.Insert (position, objectToAdd);
+	
 	}
 
 	// when all units have either do nothing or can't do something
 	public void LaunchTurn()
 	{
-		foreach (var playingObject in allPlayingObjects) 
+		Debug.Log ("new turn");
+		if (allPlayingObjects.Count > 0) 
 		{
-			playingObject.SetBudget(playingObject.GetBudget () + playingObject.GetIncrement ());
-		}
+			foreach (var playingObject in allPlayingObjects) 
+			{
+				playingObject.SetBudget(playingObject.GetBudget () + playingObject.GetIncrement ());
+			}
 
-		currentPlayingObject = allPlayingObjects [0];
-		currentPlayingObject.BeginTurn ();
+			currentPlayingObject = allPlayingObjects [0];
+			currentPlayingObject.BeginTurn ();
+		} 
+		else 
+		{
+			Debug.Log ("no unit");
+		}
 	}
 	// changement d initiative
 
@@ -66,12 +66,26 @@ public class TurnManager : MonoBehaviour {
 
 	void Update()
 	{
-		if (currentPlayingObject != null && currentPlayingObject.IsTurnEnded ())
-			OnTurnEnded ();
+		if (currentPlayingObject != null)
+		{
+			if (currentPlayingObject.HasTurnEnded ())
+			{
+				Debug.Log ("manager launch the next unit turn");
+				OnTurnEnded ();
+			}
+		}
+		else
+		{
+			Debug.Log ("no cuurent playing object" + allPlayingObjects.Count);
+			if (allPlayingObjects.Count > 0)
+			{
+				Debug.Log ("manager is trying to launch a turn");
+				LaunchTurn ();
+			}
+		}
 	}
 
 	void Start()
 	{
-		allPlayingObjects = new List<TurnPlayingObject> ();
 	}
 }

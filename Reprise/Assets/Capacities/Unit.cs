@@ -24,28 +24,26 @@ public class Unit : MonoBehaviour, TurnPlayingObject {
 	public float tmpDammages = 10F;
 	public float tmpDef = 5F;
 
-	void Start() {
+	void Start()
+	{
 		gameManager = FindObjectOfType<Constants> ();
 		gameManager.allUnits.Add (this);
 		turnManager = FindObjectOfType<TurnManager> ();
 		turnManager.AddObject (this);
-		Debug.Log (positionInGrid);
 		transform.position = gameManager.walkableTileMap.GetCellCenterWorld (positionInGrid);
-
-		//for tests since there is nothing but one unit
-		turnManager.LaunchTurn();
 	}
 
 	void Update() {
 		if (isPlaying) {
 			if (curUsedCapacity.Execute ()) {
+				Debug.Log ("end turn");
 				isPlaying = false;
 				isTurn = false;
 			}
 		}
 	}
 
-	public bool IsTurnEnded ()
+	public bool HasTurnEnded ()
 	{
 		return !isTurn;
 	}
