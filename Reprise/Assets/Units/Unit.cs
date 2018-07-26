@@ -22,7 +22,6 @@ public class Unit : MonoBehaviour, TurnPlayingObject {
 	protected Controler controler;
 
 	[HideInInspector] public UnitAttributes currentAttributes; // turn it into unitbreed
-
 	private UnitAttributes baseAttributes;
 
 	void Start()
@@ -33,8 +32,8 @@ public class Unit : MonoBehaviour, TurnPlayingObject {
 		turnManager = FindObjectOfType<TurnManager> ();
 		turnManager.AddObject (this);
 		transform.position = gameManager.walkableTileMap.GetCellCenterWorld (positionInGrid);
-		baseAttributes = gameObject.GetComponent<UnitAttributes> ();
-		currentAttributes = new UnitAttributes (baseAttributes);
+		//baseAttributes = gameObject.GetComponent<UnitAttributes> ();
+		//currentAttributes = new UnitAttributes (baseAttributes);
 
 	}
 
@@ -98,5 +97,15 @@ public class Unit : MonoBehaviour, TurnPlayingObject {
 	{
 		isTurn = true;
 		return 1; //find cost of the playing capacity
+	}
+
+	public void AddBuff(UnitAttributes modifier)
+	{
+		
+	}
+
+	public void RemoveBuff(UnitAttributes modifier)
+	{
+		
 	}
 }

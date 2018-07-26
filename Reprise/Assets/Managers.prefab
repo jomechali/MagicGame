@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224297890260679796}
   - component: {fileID: 114824417891094736}
+  - component: {fileID: 114578003296562246}
   m_Layer: 5
   m_Name: Managers
   m_TagString: Untagged
@@ -27,6 +28,17 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &114578003296562246
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1141591642967858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6241ff0877be979479d627a94fa7809f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114824417891094736
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -41,6 +53,9 @@ MonoBehaviour:
   spellBar: {fileID: 224046392217005670, guid: 4d5e9570823359c4eb05bb8f2358a9f2, type: 2}
   spellButton: {fileID: 224083964159757608, guid: 02b99141b595a6e4e9c7ed400475c98e,
     type: 2}
+  allUnits: []
+  blockingTileMap: {fileID: 0}
+  walkableTileMap: {fileID: 0}
 --- !u!224 &224297890260679796
 RectTransform:
   m_ObjectHideFlags: 1

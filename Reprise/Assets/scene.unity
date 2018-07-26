@@ -797,7 +797,6 @@ GameObject:
   - component: {fileID: 251234174}
   - component: {fileID: 251234173}
   - component: {fileID: 251234176}
-  - component: {fileID: 251234175}
   m_Layer: 11
   m_Name: Unit
   m_TagString: Untagged
@@ -907,23 +906,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.0001, y: 0.0001}
   m_EdgeRadius: 0
---- !u!114 &251234175
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 251234170}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6d27b23088e5e0498ba90af7563ed7d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxLife: 0
-  currentLife: 0
-  maxMana: 0
-  currentMana: 0
-  attack: 0
-  armor: 0
 --- !u!114 &251234176
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -936,7 +918,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   positionInGrid: {x: 0, y: 0, z: 0}
-  currentAttributes: {fileID: 0}
 --- !u!1 &426878329
 GameObject:
   m_ObjectHideFlags: 0
@@ -3069,7 +3050,6 @@ GameObject:
   - component: {fileID: 1060261672}
   - component: {fileID: 1060261677}
   - component: {fileID: 1060261678}
-  - component: {fileID: 1060261679}
   m_Layer: 11
   m_Name: Character
   m_TagString: Untagged
@@ -3209,7 +3189,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   positionInGrid: {x: 0, y: 0, z: 0}
-  currentAttributes: {fileID: 0}
 --- !u!114 &1060261678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3221,23 +3200,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14a32e1fccedfa84d895d0d9c2341398, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1060261679
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1060261671}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6d27b23088e5e0498ba90af7563ed7d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxLife: 0
-  currentLife: 0
-  maxMana: 0
-  currentMana: 0
-  attack: 0
-  armor: 0
 --- !u!1 &1324537287
 GameObject:
   m_ObjectHideFlags: 0
@@ -3574,22 +3536,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b5e3b8efb5f3d754098fe4320a7f2f26, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1726164171 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1141591642967858, guid: b5e3b8efb5f3d754098fe4320a7f2f26,
-    type: 2}
-  m_PrefabInternal: {fileID: 1726164170}
---- !u!114 &1726164175
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1726164171}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6241ff0877be979479d627a94fa7809f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1732586378
 GameObject:
   m_ObjectHideFlags: 0

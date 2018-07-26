@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UnitAttributes : MonoBehaviour {
+public struct UnitAttributes {
 
 	// turn it into unitbreed, not a monobehaviour but define externally
 	public float maxLife;
@@ -13,16 +13,4 @@ public class UnitAttributes : MonoBehaviour {
 
 	public float attack;
 	public float armor;
-
-	public UnitAttributes (UnitAttributes other)
-	{
-		maxLife = other.maxLife;
-		currentLife = other.currentLife;
-
-		maxMana = other.maxMana;
-		currentMana = other.currentMana;
-
-		attack = other.attack;
-		armor = other.armor;
-	}
 }

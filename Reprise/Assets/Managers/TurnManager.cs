@@ -4,22 +4,43 @@ using UnityEngine;
 
 public class TurnManager : MonoBehaviour {
 
-	private List<TurnPlayingObject> allPlayingObjects = new List<TurnPlayingObject> ();
-	private TurnPlayingObject currentPlayingObject;
+	private class TurnPlayingObjectWithTimedModifiers
+	{
+		public TurnPlayingObject mainObject;
+		public List<TimedLifeModifier> timedModifers;
+
+		public TurnPlayingObjectWithTimedModifiers(TurnPlayingObject _mainObject)
+		{
+			mainObject = _mainObject;
+			timedModifers = new List<TimedLifeModifier> ();
+		}
+	}
+	private List<TurnPlayingObjectWithTimedModifiers> allPlayingObjects = new List<TurnPlayingObjectWithTimedModifiers> ();
+
+	private TurnPlayingObjectWithTimedModifiers currentPlayingObject;
 
 	public void AddObject(TurnPlayingObject objectToAdd)
 	{
 		Debug.Log ("object to add" + (objectToAdd != null) + ((Unit)objectToAdd).positionInGrid);
 
-		IEnumerator<TurnPlayingObject> enumerator = allPlayingObjects.GetEnumerator ();
+		TurnPlayingObjectWithTimedModifiers adaptedObjectToAdd = new TurnPlayingObjectWithTimedModifiers (objectToAdd);
+		IEnumerator<TurnPlayingObjectWithTimedModifiers> enumerator = allPlayingObjects.GetEnumerator ();
 
 		int position = 0;
-		while (enumerator.MoveNext () && enumerator.Current.GetInitiative () > objectToAdd.GetInitiative ())
+		while (enumerator.MoveNext () && enumerator.Current.mainObject.GetInitiative () > objectToAdd.GetInitiative ())
 			position++;
 
 		Debug.Log ("unit added at position " + position);
-		allPlayingObjects.Insert (position, objectToAdd);
+		allPlayingObjects.Insert (position, adaptedObjectToAdd);
 	
+	}
+
+	public void AddTimedLifeModifer(TurnPlayingObject objectToModify, TimedLifeModifier modifier)
+	{
+		// s assurer que lobjet existe
+		// ajouter le modifier
+		// l appliquer une fois
+
 	}
 
 	// when all units have either do nothing or can't do something
@@ -30,11 +51,11 @@ public class TurnManager : MonoBehaviour {
 		{
 			foreach (var playingObject in allPlayingObjects) 
 			{
-				playingObject.SetBudget(playingObject.GetBudget () + playingObject.GetIncrement ());
+				playingObject.mainObject.SetBudget(playingObject.mainObject.GetBudget () + playingObject.mainObject.GetIncrement ());
 			}
 
 			currentPlayingObject = allPlayingObjects [0];
-			currentPlayingObject.BeginTurn ();
+			currentPlayingObject.mainObject.BeginTurn ();
 		} 
 		else 
 		{
@@ -55,20 +76,22 @@ public class TurnManager : MonoBehaviour {
 		else
 		{
 			currentPlayingObject = allPlayingObjects [previouslyPlayingObjectIndex + 1];
-			currentPlayingObject.BeginTurn ();			
+			currentPlayingObject.mainObject.BeginTurn ();			
 		}
 	}
 
 	public void RemoveTurnPlayingObject(TurnPlayingObject toRemove) 
 	{
-		allPlayingObjects.Remove (toRemove);
+		// find the right object to remove
+		// allPlayingObjects.Remove (toRemove);
 	}
 
 	void Update()
 	{
+		// launch first modifiers
 		if (currentPlayingObject != null)
 		{
-			if (currentPlayingObject.HasTurnEnded ())
+			if (currentPlayingObject.mainObject.HasTurnEnded ())
 			{
 				Debug.Log ("manager launch the next unit turn");
 				OnTurnEnded ();
