@@ -21,7 +21,7 @@ public class Buff
 		}
 	}
 
-	public void OnTimeEnded()
+	public void OnRemove ()
 	{
 		attachedUnit.RemoveBuff (temporaryModifiers);
 	}

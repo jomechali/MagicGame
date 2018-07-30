@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6d27b23088e5e0498ba90af7563ed7d, type: 3}
+  m_Name: MainCharacterBaseAttributes
+  m_EditorClassIdentifier: 
+  maxLife: 11.76
+  currentLife: 6.74
+  maxMana: 4.72
+  currentMana: 6.22
+  attack: 5.38
+  armor: 5.57

@@ -8,9 +8,9 @@ public class BuffLifeCounter : TimedLifeModifier
 
 	#region implemented abstract members of TimedLifeModifier
 
-	public override void OnTimeEnded ()
+	public override void OnRemove ()
 	{
-		attachedBuff.OnTimeEnded ();
+		attachedBuff.OnRemove ();
 	}
 
 	public override void BeginTurn ()

@@ -8,11 +8,25 @@ public class TurnManager : MonoBehaviour {
 	{
 		public TurnPlayingObject mainObject;
 		public List<TimedLifeModifier> timedModifers;
+		// this will be usefull in case of change of initiative or increment by spell
+		public bool shouldPlay = false; // false : did nothing, not enough points to do something, true : points have been modified, hasnt played yet AND has enough points
 
 		public TurnPlayingObjectWithTimedModifiers(TurnPlayingObject _mainObject)
 		{
 			mainObject = _mainObject;
 			timedModifers = new List<TimedLifeModifier> ();
+			shouldPlay = true;
+		}
+
+		public void BeginTurn ()
+		{
+			foreach (var currentModifier in timedModifers)
+			{
+				currentModifier.BeginTurn ();
+				currentModifier.DecrementRemainingTime ();
+			}
+
+			mainObject.BeginTurn ();
 		}
 	}
 	private List<TurnPlayingObjectWithTimedModifiers> allPlayingObjects = new List<TurnPlayingObjectWithTimedModifiers> ();
@@ -37,13 +51,19 @@ public class TurnManager : MonoBehaviour {
 
 	public void AddTimedLifeModifer(TurnPlayingObject objectToModify, TimedLifeModifier modifier)
 	{
-		// s assurer que lobjet existe
-		// ajouter le modifier
-		// l appliquer une fois
+		TurnPlayingObjectWithTimedModifiers objectGroup = allPlayingObjects.Find(x => x.mainObject == objectToModify);
 
+		if (objectGroup != null)
+		{
+			objectGroup.timedModifers.Add (modifier);
+		} 
+		else 
+		{
+			Debug.Log ("object not found");
+		}
 	}
 
-	// when all units have either do nothing or can't do something
+	// when all units have either do nothing or are unable to do something
 	public void LaunchTurn()
 	{
 		Debug.Log ("new turn");
@@ -52,63 +72,72 @@ public class TurnManager : MonoBehaviour {
 			foreach (var playingObject in allPlayingObjects) 
 			{
 				playingObject.mainObject.SetBudget(playingObject.mainObject.GetBudget () + playingObject.mainObject.GetIncrement ());
+				playingObject.shouldPlay = true;
 			}
 
 			currentPlayingObject = allPlayingObjects [0];
-			currentPlayingObject.mainObject.BeginTurn ();
+			currentPlayingObject.BeginTurn ();
 		} 
 		else 
 		{
 			Debug.Log ("no unit");
 		}
 	}
-	// changement d initiative
 
 	private void OnTurnEnded() 
 	{
 		int previouslyPlayingObjectIndex = allPlayingObjects.FindIndex (x => currentPlayingObject == x);
-		if (previouslyPlayingObjectIndex == allPlayingObjects.Count - 1) 
+		int nbObjects = allPlayingObjects.Count;
+		if (previouslyPlayingObjectIndex == nbObjects - 1 && ShouldLaunchTurn ()) 
 		{
-			//miss the test before increment the time budget
 			//begin the next turn
 			LaunchTurn ();
 		}
 		else
 		{
-			currentPlayingObject = allPlayingObjects [previouslyPlayingObjectIndex + 1];
-			currentPlayingObject.mainObject.BeginTurn ();			
+			currentPlayingObject = allPlayingObjects [(previouslyPlayingObjectIndex + 1) % nbObjects ];
+			if (currentPlayingObject.shouldPlay)
+			{
+				currentPlayingObject.BeginTurn ();
+			}
+			else
+			{
+				OnTurnEnded ();
+			}
 		}
+	}
+
+	private bool ShouldLaunchTurn ()
+	{
+		return !(allPlayingObjects.Exists (x => x.shouldPlay == true));
 	}
 
 	public void RemoveTurnPlayingObject(TurnPlayingObject toRemove) 
 	{
-		// find the right object to remove
-		// allPlayingObjects.Remove (toRemove);
+		int indexToRemove = allPlayingObjects.FindIndex (x => currentPlayingObject == x);
+		allPlayingObjects.RemoveAt(indexToRemove);
 	}
 
 	void Update()
 	{
-		// launch first modifiers
 		if (currentPlayingObject != null)
 		{
-			if (currentPlayingObject.mainObject.HasTurnEnded ())
+			TurnPlayingObject currentObject = currentPlayingObject.mainObject;
+			if (currentObject.HasTurnEnded ())
 			{
 				Debug.Log ("manager launch the next unit turn");
+				currentPlayingObject.shouldPlay = currentObject.GetBudget () >= currentObject.GetMinimalTurnCost (); // and find a way to take into account the donothing choice
 				OnTurnEnded ();
 			}
 		}
 		else
 		{
-			Debug.Log ("no cuurent playing object" + allPlayingObjects.Count);
+			Debug.Log ("no current playing object ");
 			if (allPlayingObjects.Count > 0)
 			{
 				Debug.Log ("manager is trying to launch a turn");
 				LaunchTurn ();
 			}
 		}
-	}
-
-	void Start()
-	{
 	}
 }

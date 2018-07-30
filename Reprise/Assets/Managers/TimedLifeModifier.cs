@@ -9,7 +9,12 @@ public abstract class TimedLifeModifier
 	public float decrement
 	{ get; set; }
 
-	abstract public void OnTimeEnded ();
+	public void DecrementRemainingTime ()
+	{
+		remainingTime -= decrement;
+	}
+
+	abstract public void OnRemove ();
 
 	abstract public void BeginTurn ();
 }

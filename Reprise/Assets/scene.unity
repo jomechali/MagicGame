@@ -918,6 +918,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   positionInGrid: {x: 0, y: 0, z: 0}
+  currentAttributes: {fileID: 0}
+  unitBreed: {fileID: 0}
 --- !u!1 &426878329
 GameObject:
   m_ObjectHideFlags: 0
@@ -3189,6 +3191,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   positionInGrid: {x: 0, y: 0, z: 0}
+  currentAttributes: {fileID: 0}
+  unitBreed: {fileID: 11400000, guid: 894e345288dbbb24aa0ad7ccf2234410, type: 2}
 --- !u!114 &1060261678
 MonoBehaviour:
   m_ObjectHideFlags: 0

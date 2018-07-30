@@ -21,8 +21,8 @@ public class Unit : MonoBehaviour, TurnPlayingObject {
 
 	protected Controler controler;
 
-	[HideInInspector] public UnitAttributes currentAttributes; // turn it into unitbreed
-	private UnitAttributes baseAttributes;
+	[HideInInspector] public UnitAttributes currentAttributes;
+	public UnitAttributes unitBreed;
 
 	void Start()
 	{

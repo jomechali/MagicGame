@@ -7,7 +7,7 @@ public class UnitLifeCounter : TimedLifeModifier
 	{ get; set; }
 
 	#region implemented abstract members of TimedLifeModifier
-	public override void OnTimeEnded ()
+	public override void OnRemove ()
 	{
 		Debug.Log ("timed life unit has to be killed");
 	}
