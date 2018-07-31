@@ -7,7 +7,7 @@ public class SpellOnPaper : ScriptableObject{
 
 	public SpellAttributes resultingAttributes;
 
-	public List<SpellAttributes> attributesModifiers;
+	[HideInInspector] public List<SpellAttributes> attributesModifiers; // this is designed to be used with runes
 
 
 	#if UNITY_EDITOR
@@ -19,6 +19,12 @@ public class SpellOnPaper : ScriptableObject{
 	}
 	#endif
 
-	///////////////ecrire les regles de combinaison
-	///////////////traduire le resultat en sort utilisable quand les unités seront mis en place, l ajout de bonus speciaux se fera ici, stockés dans cette classe
+	public void ComputeResultingAttributes()
+	{
+		foreach (var attributeModifier in attributesModifiers) {
+			resultingAttributes += attributeModifier;
+		}
+	}
+	// use the base spell attributes to find the reel effect
+	///////////////traduire le resultat en sort utilisable quand les unités seront mises en place, l ajout de bonus speciaux se fera ici, stockés dans cette classe
 }
