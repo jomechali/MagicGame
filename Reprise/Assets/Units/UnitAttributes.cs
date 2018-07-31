@@ -15,6 +15,19 @@ public class UnitAttributes : ScriptableObject {
 	public float attack;
 	public float armor;
 
+	// capacities
+	// Move
+	public bool isMoveCapacityAvailable = true;
+	public float moveBaseTimeCost = 1;
+
+	// Attack
+	public bool isAttackCapacityAvailable = true;
+	public float attackBaseTimeCost = 1;
+
+	// LaunchSpell
+	public bool isLaunchSpellCapacityAvailable = true;
+	public float launchSpellBaseTimeCost = 1;
+
 	// in order to create it in the editor
 
 	#if UNITY_EDITOR

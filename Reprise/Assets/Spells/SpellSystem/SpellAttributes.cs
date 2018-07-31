@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public enum TargetType
 {
@@ -23,7 +24,7 @@ public enum SpellType
 	DirectDammages
 }
 
-public class SpellAttributes {
+public class SpellAttributes : ScriptableObject {
 
 	public float manaCost = 0;
 	public float power = 0;
@@ -41,5 +42,15 @@ public class SpellAttributes {
 	public ShootType shootType = ShootType.Missile;
 
 	public SpellType spellType = SpellType.DirectDammages;
+
+
+	#if UNITY_EDITOR
+	[MenuItem("Assets/Create/Attributes/SpellAttributes")]
+	public static void CreatedSpellAttributesAsset()
+	{
+		string path = EditorUtility.SaveFilePanelInProject ("Save spell attributes", "New Spell Attributes", "asset", "Save Spell Attributes");
+		AssetDatabase.CreateAsset (ScriptableObject.CreateInstance<SpellAttributes>(), path);
+	}
+	#endif
 
 }
