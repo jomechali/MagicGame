@@ -3038,6 +3038,29 @@ Tilemap:
     m_DirtyIndex: 1
   - serializedVersion: 1
     m_DirtyIndex: 0
+--- !u!1 &521868376 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1141591642967858, guid: b5e3b8efb5f3d754098fe4320a7f2f26,
+    type: 2}
+  m_PrefabInternal: {fileID: 1726164170}
+--- !u!114 &521868377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 521868376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbc317bbab24f1f46a05f59712ec8632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spellBar: {fileID: 224046392217005670, guid: 4d5e9570823359c4eb05bb8f2358a9f2, type: 2}
+  spellButton: {fileID: 224083964159757608, guid: 02b99141b595a6e4e9c7ed400475c98e,
+    type: 2}
+  allUnits: []
+  blockingTileMap: {fileID: 0}
+  walkableTileMap: {fileID: 0}
+  turnManager: {fileID: 0}
 --- !u!1 &1060261671
 GameObject:
   m_ObjectHideFlags: 0
@@ -3201,7 +3224,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1060261671}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14a32e1fccedfa84d895d0d9c2341398, type: 3}
+  m_Script: {fileID: 11500000, guid: 8e26b0a1c96820740a39baee281a2a4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1324537287
@@ -3537,7 +3560,8 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114824417891094736, guid: b5e3b8efb5f3d754098fe4320a7f2f26, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b5e3b8efb5f3d754098fe4320a7f2f26, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1732586378

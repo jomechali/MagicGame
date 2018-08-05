@@ -10,10 +10,11 @@ public class UnitLifeCounter : TimedLifeModifier
 	public override void OnRemove ()
 	{
 		Debug.Log ("timed life unit has to be killed");
+		Unit.gameManager.RemoveUnitFromTheGame (attachedUnit);
 	}
 	public override void BeginTurn ()
 	{
-		Debug.Log ("timedlife decreased for unit");
+		Debug.Log ("timedlife has been decreased for unit");
 	}
 	#endregion
 }

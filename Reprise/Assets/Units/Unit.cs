@@ -9,7 +9,7 @@ public class Unit : MonoBehaviour, TurnPlayingObject {
 	public const float smoothMoveFactor = 0.2F;
 	public const int TIME_BUDGET_BY_TURN = 10;
 
-	public static Constants gameManager;
+	public static GameManager gameManager;
 	public static TurnManager turnManager;
 
 	public Vector3Int positionInGrid; // to set when spawn
@@ -19,7 +19,7 @@ public class Unit : MonoBehaviour, TurnPlayingObject {
 
 	private Capacity curUsedCapacity;
 
-	protected Controler controler;
+	protected Controller controller;
 
 	[HideInInspector] public UnitAttributes currentAttributes;
 	public UnitAttributes unitBreed;
@@ -27,13 +27,12 @@ public class Unit : MonoBehaviour, TurnPlayingObject {
 	void Start()
 	{
 		
-		gameManager = FindObjectOfType<Constants> ();
+		gameManager = FindObjectOfType<GameManager> ();
 		gameManager.allUnits.Add (this);
 		turnManager = FindObjectOfType<TurnManager> ();
 		turnManager.AddObject (this);
 		transform.position = gameManager.walkableTileMap.GetCellCenterWorld (positionInGrid);
-		//baseAttributes = gameObject.GetComponent<UnitAttributes> ();
-		//currentAttributes = new UnitAttributes (baseAttributes);
+		currentAttributes = new UnitAttributes (unitBreed);
 
 	}
 
@@ -107,5 +106,9 @@ public class Unit : MonoBehaviour, TurnPlayingObject {
 	public void RemoveBuff(UnitAttributes modifier)
 	{
 		
+	}
+
+	public void OnDeath()
+	{
 	}
 }

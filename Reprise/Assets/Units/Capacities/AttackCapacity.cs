@@ -6,21 +6,21 @@ public class AttackCapacity : Capacity {
 
 	private Unit target;
 
-	public AttackCapacity(Unit _executer, Constants _gameManager, Unit _target) : base(_executer, _gameManager) {
-		target = _target;
+	public AttackCapacity(Unit _executer, GameManager _gameManager, Vector3Int targettedCell) : base(_executer, _gameManager) 
+	{
+		target = gameManager.UnitOnTile (targettedCell);
 	}
 
-	public override bool CanBeUsed () {
-		if (!isAvailable)
-			return false;
-		
-		return true;
+	public override bool CanBeUsed ()
+	{
+		return executer.currentAttributes.isAttackCapacityAvailable & (target != null);
 	}
 
-	public override bool Execute (){
+	public override bool Execute ()
+	{
 		if (!executed) {
-			//target.attributes.curLife -= (executer.tmpDammages - target.tmpDef);
-
+			// temp, dumm formula to compute dammages
+			target.currentAttributes.currentLife -= executer.currentAttributes.attack - target.currentAttributes.armor;
 			executed = true;
 		}
 

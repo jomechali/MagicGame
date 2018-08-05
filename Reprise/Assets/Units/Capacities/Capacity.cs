@@ -6,9 +6,7 @@ public abstract class Capacity {
 
 	protected Unit executer;
 
-	protected Constants gameManager;
-
-	protected bool isAvailable = true;
+	protected GameManager gameManager;
 
 	protected bool executed = false;
 
@@ -16,7 +14,7 @@ public abstract class Capacity {
 
 	protected int curNumberOfPlayingFrames = 0;
 
-	public Capacity(Unit _executer, Constants _gameManager) {
+	public Capacity(Unit _executer, GameManager _gameManager) {
 		this.executer = _executer;
 		this.gameManager = _gameManager;
 	}

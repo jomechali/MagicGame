@@ -42,4 +42,30 @@ public class UnitAttributes : ScriptableObject {
 	// operations to manipulate the attributes
 
 	// copy constructor
+	public UnitAttributes (UnitAttributes other)
+	{
+
+		// turn it into unitbreed, not a monobehaviour but define externally
+		maxLife = other.maxLife;
+		currentLife = other.currentLife;
+
+		maxMana = other.maxMana;
+		currentMana = other.currentMana;
+
+		attack = other.attack;
+		armor = other.armor;
+
+		// capacities
+		// Move
+		isMoveCapacityAvailable = other.isMoveCapacityAvailable;
+		moveBaseTimeCost = other.moveBaseTimeCost;
+
+		// Attack
+		isAttackCapacityAvailable = other.isAttackCapacityAvailable;
+		attackBaseTimeCost = other.attackBaseTimeCost;
+
+		// LaunchSpell
+		isLaunchSpellCapacityAvailable = other.isLaunchSpellCapacityAvailable;
+		launchSpellBaseTimeCost = other.launchSpellBaseTimeCost;
+	}
 }

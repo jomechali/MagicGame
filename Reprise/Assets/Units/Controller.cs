@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Controler : MonoBehaviour {
+public abstract class Controller : MonoBehaviour {
 
 	protected Unit toControl;
-	protected Constants gameManager;
+	protected GameManager gameManager;
 
-	public Controler() {}
+	public Controller() {}
 
 	void Start() {
 		this.toControl = gameObject.GetComponent<Unit> ();
 
-		this.gameManager = FindObjectOfType<Constants> ();
+		this.gameManager = FindObjectOfType<GameManager> ();
 	}
 
 	void Update() {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-public class SpellOnPaper : ScriptableObject{
+public class SpellOnPaper : ScriptableObject {
 
 	public SpellAttributes resultingAttributes;
 

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Tilemaps;
 
-public class Constants : MonoBehaviour {
+public class GameManager : MonoBehaviour {
 
 	public static float cellSize;
 	public Transform spellBar;
@@ -18,11 +18,13 @@ public class Constants : MonoBehaviour {
 
 	[HideInInspector] public Tilemap blockingTileMap;
 	[HideInInspector] public Tilemap walkableTileMap;
+	[HideInInspector] public TurnManager turnManager;
 
 	void Awake() {
 
 		blockingTileMap = GameObject.Find ("BlockingTilemap").GetComponent<Tilemap> ();
 		walkableTileMap = GameObject.Find ("SimpleTilemap").GetComponent<Tilemap> ();
+		turnManager = gameObject.GetComponent<TurnManager> ();
 
 		cellSize = GameObject.Find ("Grid").GetComponent<Grid> ().cellSize.x;
 
@@ -47,10 +49,48 @@ public class Constants : MonoBehaviour {
 		}
 	}
 
+	public void OnTurnEnded()
+	{
+		// temp, inefficient way to check if a unit is dead by lacking of life
+		List<Unit> toRemove = new List<Unit> ();
+
+		foreach (var unit in allUnits)
+		{
+			if (unit.currentAttributes.currentLife <= 0)
+			{
+				unit.OnDeath ();
+				toRemove.Add (unit);
+			}
+		}
+
+		foreach (var unitToRemove in toRemove) 
+		{
+			RemoveUnitFromTheGame (unitToRemove);
+		}
+		//allUnits.RemoveAll (x => toRemove.Contains (x));
+	}
+
+	public void RemoveUnitFromTheGame (Unit unitToRemove)
+	{
+		allUnits.Remove (unitToRemove);
+		turnManager.RemoveTurnPlayingObject (unitToRemove);
+		Object.Destroy (unitToRemove.gameObject);
+	}
+
 	public void OnSpellButtonClick(Transform button){
 		
 		int buttonClicked = button.GetSiblingIndex ();
 		Debug.Log ("button clicked nb " + buttonClicked );
 	}
 
+	public Unit UnitOnTile(Vector3Int tile)
+	{
+		foreach (var unit in allUnits)
+		{
+			if (unit.positionInGrid == tile)
+				return unit;
+		}
+
+		return null;
+	}
 }

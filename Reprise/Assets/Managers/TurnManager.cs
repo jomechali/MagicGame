@@ -9,7 +9,7 @@ public class TurnManager : MonoBehaviour {
 		public TurnPlayingObject mainObject;
 		public List<TimedLifeModifier> timedModifers;
 		// this will be usefull in case of change of initiative or increment by spell
-		public bool shouldPlay = false; // false : did nothing, not enough points to do something, true : points have been modified, hasnt played yet AND has enough points
+		public bool shouldPlay = false; // false : the unit has chosen to do nothing, not enough points to do something, true : points have been modified, hasnt played yet AND has enough points
 
 		public TurnPlayingObjectWithTimedModifiers(TurnPlayingObject _mainObject)
 		{
@@ -22,8 +22,16 @@ public class TurnManager : MonoBehaviour {
 		{
 			foreach (var currentModifier in timedModifers)
 			{
-				currentModifier.BeginTurn ();
-				currentModifier.DecrementRemainingTime ();
+				if (currentModifier.remainingTime <= 0) 
+				{
+					currentModifier.OnRemove ();
+					timedModifers.Remove (currentModifier);
+				} 
+				else
+				{
+					currentModifier.BeginTurn ();
+					currentModifier.DecrementRemainingTime ();
+				}
 			}
 
 			mainObject.BeginTurn ();
@@ -116,6 +124,7 @@ public class TurnManager : MonoBehaviour {
 	{
 		int indexToRemove = allPlayingObjects.FindIndex (x => currentPlayingObject == x);
 		allPlayingObjects.RemoveAt(indexToRemove);
+		//nothing to clean properly?
 	}
 
 	void Update()
